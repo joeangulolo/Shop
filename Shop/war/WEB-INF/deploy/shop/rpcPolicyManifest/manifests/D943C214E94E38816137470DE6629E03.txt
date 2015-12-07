@@ -1,0 +1,2 @@
+serviceClass: co.edu.unal.client.service.ClientService
+path: 9A8C121461423A6D924700796D8AE254.gwt.rpc

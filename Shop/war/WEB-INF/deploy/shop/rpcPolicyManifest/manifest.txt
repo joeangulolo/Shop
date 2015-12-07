@@ -1,0 +1,3 @@
+# Module shop
+# RPC service class, partial path of RPC policy file
+co.edu.unal.client.service.ClientService, 9A8C121461423A6D924700796D8AE254.gwt.rpc
