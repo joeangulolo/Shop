@@ -9,7 +9,9 @@ import java.util.Random;
 import co.edu.unal.client.service.ClientService;
 import co.edu.unal.client.service.ClientServiceAsync;
 import co.edu.unal.client.service.ClientServiceImpl;
+import co.edu.unal.client.view.CarritoView;
 import co.edu.unal.client.view.ProductsView;
+import co.edu.unal.client.view.Productvw;
 import co.edu.unal.shared.LoginInfo;
 import co.edu.unal.shared.User;
 
@@ -23,6 +25,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -104,6 +107,7 @@ public class Shop implements EntryPoint {
 		HorizontalPanel hPanel = new HorizontalPanel();
 		Label mlb = new Label("Welcome to the international Shop Traditional Costume");
 		mlb.getElement().getStyle().setColor("blue");
+		Button enter = new Button("Enter site");
 		PushButton img = new PushButton(new Image("/images/portal1.jpg"));
 		PushButton img2 = new PushButton(new Image("/images/portal2.jpg"));
 		PushButton img3 = new PushButton(new Image("/images/portal3.jpg"));
@@ -118,8 +122,10 @@ public class Shop implements EntryPoint {
 		
 		
 		loginLink = new Anchor("Entrar");
-//		loginLink.addClickHandler(new SendClickHandler());
+//		enter.addClickHandler(new SendClickHandler());
 		vPanel.add(loginLink);
+		vPanel.add(enter);
+		enter.addClickHandler(new SendClickHandler());
 		
 		//RegisterView register = new RegisterView();
 		//ProductsView pv = new ProductsView();
@@ -141,15 +147,17 @@ public class Shop implements EntryPoint {
 					addGoogleAuthHelper();
 					loadLogout(result);
 				} else {
+					Window.alert("Bien1");
 					loadLogin(result);
-					String name = result.getName();
-					String mail = result.getEmailAddress();
-					String id = GenId();
-					u = new User(id, name, mail);
-					ProductsView pv = new ProductsView();
-					vPanel.setVisible(false);
 					Window.alert("Bien2");
-					RootPanel.get().add(pv);
+//					String name = result.getName();
+//					String mail = result.getEmailAddress();
+//					String id = GenId();
+//					u = new User(id, name, mail);
+//					ProductsView pv = new ProductsView();
+//					vPanel.setVisible(false);
+//					Window.alert("Bien3");
+//					RootPanel.get().add(pv);
 					
 					//addUser();
 //					rpcService.addUser(u,new AsyncCallback<User>() {
@@ -207,17 +215,20 @@ public class Shop implements EntryPoint {
 		return output;
 	}
 	
-//	private class SendClickHandler implements ClickHandler{
-//
-//		@Override
-//		public void onClick(ClickEvent event) {
-//			vPanel.setVisible(false);
-//			Window.alert("Bien");
-//			ClientServiceImpl clientimpl = new ClientServiceImpl(GWT.getModuleBaseURL()+"clientService");
-//			Window.alert("Bien2");
-//			//RegisterView register = new RegisterView(null);
-//			//RootPanel.get().add(clientimpl.getRegister());
-//		}
-//		
-//	}
+	private class SendClickHandler implements ClickHandler{
+
+		@Override
+		public void onClick(ClickEvent event) {
+			//Window.alert("Bien");
+			//ProductsView pv = new ProductsView();
+			Productvw cv = new Productvw();
+			vPanel.setVisible(false);
+			Window.alert("Bien2");
+			RootPanel.get().add(cv);
+			//ClientServiceImpl clientimpl = new ClientServiceImpl(GWT.getModuleBaseURL()+"clientService");
+			//RegisterView register = new RegisterView(null);
+			//RootPanel.get().add(clientimpl.getRegister());
+		}
+		
+	}
 }

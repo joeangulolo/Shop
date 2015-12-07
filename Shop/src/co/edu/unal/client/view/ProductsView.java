@@ -65,23 +65,17 @@ import com.google.gwt.view.client.ListDataProvider;
 public class ProductsView extends Composite {
 	
 	private ClientServiceAsync service = com.google.gwt.core.shared.GWT.create(ClientService.class);
-//	Label title = new Label("Welcome to the Internalitional Costume Shop:");
-//	Button buy = new Button("Add to Cart");
-//	Button buy2 = new Button("Add to Cart");
-//	Button buy3 = new Button("Add to Cart");
-//	Button buy4 = new Button("Add to Cart");
-//	Button buy5 = new Button("Add to Cart");
-//	Button buy6 = new Button("Add to Cart", new ClickHandler() {
-//		
-//		@Override
-//		public void onClick(ClickEvent event) {
-//			Product p = new Product("4374", "ukraine custome",25,3);
-//			model.add(p);
-//			
-//		}
-//	});
-//	TextBox nameBox = new TextBox();
-//	Grid panel = new Grid(4, 3);
+	private DockPanel principal = new DockPanel();
+	
+	Label title = new Label("Welcome to the Internalitional Costume Shop:");
+	Button buy = new Button("Add to Cart");
+	Button buy2 = new Button("Add to Cart");
+	Button buy3 = new Button("Add to Cart");
+	Button buy4 = new Button("Add to Cart");
+	Button buy5 = new Button("Add to Cart");
+	Button buy6 = new Button("Add to Cart");
+	TextBox nameBox = new TextBox();
+	Grid panel = new Grid(4, 3);
 	
 	LinkedList<Product> list2 = new LinkedList<Product>();
 	List<Product> list;
@@ -92,73 +86,7 @@ public class ProductsView extends Composite {
 	
 	@SuppressWarnings("deprecation")
 	public ProductsView(){
-		
-		 final CellTable<Product> table = new CellTable<Product>(); 
-			
-		 final ListDataProvider<Product> model = new ListDataProvider<Product>();
-		
-		Label title = new Label("Welcome to the Internalitional Costume Shop:");
-		Button buy = new Button("Add to Cart", new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				Product p = new Product("4374", "Serbia custome",25,3);
-				List<Product> list = model.getList();
-				list.add(p);
-				
-			}
-		});
-		Button buy2 = new Button("Add to Cart", new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				Product p = new Product("4374", "Serbia custome",26,4);
-				List<Product> list = model.getList();
-				list.add(p);
-				
-			}
-		});
-		Button buy3 = new Button("Add to Cart", new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				Product p = new Product("12345", "ukraine custome",37,6);
-				List<Product> list = model.getList();
-				list.add(p);
-				
-			}
-		});
-		Button buy4 = new Button("Add to Cart", new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				Product p = new Product("8645", "Poland custome",33,6);
-				List<Product> list = model.getList();
-				list.add(p);
-				
-			}
-		});
-		Button buy5 = new Button("Add to Cart", new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				Product p = new Product("6548", "Moldavian custome",2,28);
-				List<Product> list = model.getList();
-				list.add(p);
-			}
-		});
-		Button buy6 = new Button("Add to Cart", new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				Product p = new Product("4374", "Macedonian custome",30,3);
-				List<Product> list = model.getList();
-				list.add(p);
-				
-			}
-		});
-		TextBox nameBox = new TextBox();
-		Grid panel = new Grid(4, 3);
+		initWidget(this.principal);
 		
 		panel.setWidget(0, 0, new PushButton(new Image("/images/image1.jpg"), new ClickListener() {
 			@Override
@@ -231,7 +159,7 @@ public class ProductsView extends Composite {
 		Label credit = new Label("Credito:");
 		Label creditresp = new Label("");
 		
-		//buy.addClickHandler(new BuyHandler());
+		buy.addClickHandler(new BuyHandler());
 		
 
 		
@@ -243,9 +171,9 @@ public class ProductsView extends Composite {
 		info.setWidget(2, 0, credit);
 		info.setWidget(2, 1, creditresp);
 		
-//		 final CellTable<Product> table = new CellTable<Product>(); 
-//		
-//		 final ListDataProvider<Product> model = new ListDataProvider<Product>();
+		 final CellTable<Product> table = new CellTable<Product>(); 
+		
+		 final ListDataProvider<Product> model = new ListDataProvider<Product>(getUserList());
 		 
 
 		Column<Product, String> nameColumn = new Column<Product, String>(
@@ -292,7 +220,7 @@ public class ProductsView extends Composite {
 					}
 				});
 
-				table.setRowCount(list.size());
+				table.setRowCount(getUserList().size());
 				model.addDataDisplay(table);
 
 				
@@ -304,7 +232,7 @@ public class ProductsView extends Composite {
 		dp.add(info);
 		dp.add(pc);
 		
-		DockPanel principal = new DockPanel();
+		//DockPanel principal = new DockPanel();
 		principal.setSpacing(6);
 		principal.add(tl,DockPanel.NORTH);
 		principal.add(dp, DockPanel.EAST);
@@ -313,13 +241,13 @@ public class ProductsView extends Composite {
 		RootLayoutPanel.get().add(principal);
 	}
 	
-//	private LinkedList<Product> getUserList() {
-//		LinkedList<Product> listtable = new LinkedList<Product>();
+	private LinkedList<Product> getUserList() {
+		LinkedList<Product> listtable = new LinkedList<Product>();
 //		listtable = list;
 //		listtable.add(new Product("64542", "ukraine custome",25,3));
-//		//listtable.add(new Product("3", "macedonia custome",30,2));
-//		return listtable;
-//	}
+		//listtable.add(new Product("3", "macedonia custome",30,2));
+		return listtable;
+	}
 	
 	private class BuyHandler implements ClickHandler{
 
@@ -610,9 +538,6 @@ public class ProductsView extends Composite {
 		}
 		}
 
-//	public static void UserData(String id, String name, String addres, String tel) {
-//		String s ="";
-//		//return s;
-//	}
+
 
 }

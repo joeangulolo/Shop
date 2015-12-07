@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParseException;
@@ -28,7 +30,9 @@ public class ShopServiceImpl extends RemoteServiceServlet implements ClientServi
 	
 	
 
-
+	private LinkedList<User> storeuser = new LinkedList<User>() ;
+	User pepito = new User("25", "Pepito Prez", "hola@unal.edu.co");
+	private List<User> lista ;
 
 	@Override
 	public Product addProduct(Product product) {
@@ -74,6 +78,12 @@ public class ShopServiceImpl extends RemoteServiceServlet implements ClientServi
 	private Key<User> storeUser(User user) {
 		
 		return ofy().save().entity( user ).now();
+	}
+	
+	@Override
+	public User getUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
@@ -147,6 +157,8 @@ public class ShopServiceImpl extends RemoteServiceServlet implements ClientServi
 		}
 		return loginInfo;
 	}
+
+	
 
 
 

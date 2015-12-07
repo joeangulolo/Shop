@@ -8,7 +8,7 @@ import co.edu.unal.shared.User;
 public interface ClientServiceInt {
 
 	
-//	 void addProduct(Product product);
+	 void addProduct(Product product);
 //	 void getProduct(String id);
 	 void addUser(User user);
 }

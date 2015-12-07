@@ -13,6 +13,7 @@ public interface ClientService extends RemoteService {
 	Product addProduct (Product product);
 	// Product getProduct(String id);
 	User addUser(User user);
+	User getUser(User user);
 
 	LoginInfo login(String requestUri);
 

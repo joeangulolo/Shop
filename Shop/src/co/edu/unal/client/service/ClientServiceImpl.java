@@ -22,11 +22,11 @@ public class ClientServiceImpl implements ClientServiceInt {
 		//this.register = new RegisterView(this);
 	}
 	
-//	@Override
-//	public void addProduct(Product product) {
-//		this.service.addProduct(product, new DefaultCallback());
-//		
-//	}
+	@Override
+	public void addProduct(Product product) {
+		this.service.addProduct(product, new DefaultCallback());
+		
+	}
 //
 //	@Override
 //	public void getProduct(String id) {
