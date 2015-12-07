@@ -80,37 +80,6 @@ public class CarritoView extends Composite {
 				
 				pc.add(table);
 		
-//		TextColumn<Product> nameColumn = 
-//			      new TextColumn<Product>() {
-//			         @Override
-//			         public String getValue(Product object) {
-//			            return object.name;
-//			         }
-//			      };
-//		
-//		carrito.addColumn(nameColumn, "Name");
-//		
-//		NumberCell price = new NumberCell();
-//		
-//		Column<Product, Number> priceColumn 
-//	      = new Column<Product, Number>(price) {
-//	         @Override
-//	         public Number getValue(Product object) {
-//	            return object.price;
-//	         }
-//	      };
-	      
-	     
-	      
-//	      Column<Product, String> deleteBtn = new Column<Product, String>(
-//					new ButtonCell()) {
-//				@Override
-//				public String getValue(Product c) {
-//					return "x";
-//				}
-//			};
-
-	      
 		
 	}
 	

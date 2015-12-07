@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParseException;
@@ -30,9 +32,12 @@ public class ShopServiceImpl extends RemoteServiceServlet implements ClientServi
 	
 	
 
-	private LinkedList<User> storeuser = new LinkedList<User>() ;
-	User pepito = new User("25", "Pepito Prez", "hola@unal.edu.co");
+	//private LinkedList<User> storeuser = new LinkedList<User>() ;
+	private List<Key<User>> userlist = new ArrayList<Key<User>>();
+	//User pepito = new User("25", "Pepito Prez", "hola@unal.edu.co");
 	private List<User> lista ;
+	private String name;
+	private String mail;
 
 	@Override
 	public Product addProduct(Product product) {
@@ -60,13 +65,18 @@ public class ShopServiceImpl extends RemoteServiceServlet implements ClientServi
 
 	@Override
 	public User addUser(User user) {
-		//List<Key<User>> userlist = new ArrayList<Key<User>>();
+		
 		Key<User> key = storeUser(user);
+		userList(key);
 		String id = user.getId();
 		User u = loadUser(id);
 		return user;
 	}
 
+	private List<Key<User>> userList(Key<User> user){
+		userlist.add(user);
+		return userlist;
+	}
 
 	private User loadUser(String id) {
 		LoadResult<User> r = ofy().load().type( User.class ).id( id );
@@ -82,8 +92,16 @@ public class ShopServiceImpl extends RemoteServiceServlet implements ClientServi
 	
 	@Override
 	public User getUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		User aux = new User(GenId(), name, mail);
+		return aux;
+	}
+	
+	@Override
+	public User userData(User user) {
+		name = user.getName();
+		mail = user.getEmail();
+		
+		return user;
 	}
 
 
@@ -158,6 +176,19 @@ public class ShopServiceImpl extends RemoteServiceServlet implements ClientServi
 		return loginInfo;
 	}
 
+	private String GenId(){
+		char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+		StringBuilder sb = new StringBuilder();
+		Random random = new Random();
+		for (int i = 0; i < 20; i++) {
+		    char c = chars[random.nextInt(chars.length)];
+		    sb.append(c);
+		}
+		String output = sb.toString();
+		return output;
+	}
+
+	
 	
 
 

@@ -51,6 +51,9 @@ public class Shop implements EntryPoint {
 			private static final String GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/auth";
 			private static final String GOOGLE_CLIENT_ID = "133230330852-v34pmbjjlv036np585laj4lcuta34aa4.apps.googleusercontent.com";
 			private static final String PLUS_ME_SCOPE = "https://www.googleapis.com/auth/userinfo.email";
+			
+			private String name;
+			 private String mail;
 //			
 //			private final Anchor signInLink = new Anchor("");
 //			private final Image loginImage = new Image();
@@ -60,16 +63,18 @@ public class Shop implements EntryPoint {
 //			
 			private void loadLogin(final LoginInfo loginInfo) {
 				loginLink.setHref(loginInfo.getLoginUrl());
-				loginLink.setText("*ENTRAR*");
+				loginLink.setText("*Sign In*");
 				loginLink.setTitle("Sign in");
 			}
 
 			private void loadLogout(final LoginInfo loginInfo) {
 				loginLink.setHref(loginInfo.getLogoutUrl());
 				loginLink.setText(loginInfo.getName());
+				
 				loginLink.setTitle("Sign out");
 			}
-
+			
+			
 			private void addGoogleAuthHelper() {
 				final AuthRequest req = new AuthRequest(GOOGLE_AUTH_URL, GOOGLE_CLIENT_ID)
 						.withScopes(PLUS_ME_SCOPE);
@@ -86,9 +91,12 @@ public class Shop implements EntryPoint {
 
 								@Override
 								public void onSuccess(final LoginInfo loginInfo) {
-									Window.alert("Bienvenido");
+									//Window.alert("Bienvenido");
 									loginLink.setText(loginInfo.getName());
-									
+									name = loginInfo.getName();
+									mail = loginInfo.getEmailAddress();
+									//Window.alert(name+" "+mail);
+									userData(name,mail);
 								}
 							});
 						}
@@ -101,6 +109,24 @@ public class Shop implements EntryPoint {
 					}
 				});
 				}
+			
+			public void userData(String name, String mail){
+				User inf = new User(GenId(), name, mail);
+				rpcService.userData(inf, new AsyncCallback<User>() {
+					
+					@Override
+					public void onSuccess(User result) {
+						//Window.alert("User Dat Bien");
+						
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("User Dat Fail");
+						
+					}
+				});
+			}
 	
 	public void onModuleLoad() {
 		
@@ -147,9 +173,9 @@ public class Shop implements EntryPoint {
 					addGoogleAuthHelper();
 					loadLogout(result);
 				} else {
-					Window.alert("Bien1");
+					//Window.alert("Bien1");
 					loadLogin(result);
-					Window.alert("Bien2");
+					//Window.alert("Bien2");
 //					String name = result.getName();
 //					String mail = result.getEmailAddress();
 //					String id = GenId();
@@ -159,7 +185,7 @@ public class Shop implements EntryPoint {
 //					Window.alert("Bien3");
 //					RootPanel.get().add(pv);
 					
-					//addUser();
+					addUser();
 //					rpcService.addUser(u,new AsyncCallback<User>() {
 //
 //						@Override
@@ -185,16 +211,16 @@ public class Shop implements EntryPoint {
 					//
 											@Override
 											public void onFailure(Throwable caught) {
-												Window.alert("Fallo agregar usuario");
+												//Window.alert("Fallo agregar usuario");
 												
 											}
 					
 											@Override
 											public void onSuccess(User result) {
-												vPanel.setVisible(false);
-												ProductsView pv = new ProductsView();
-												Window.alert("Bien2");
-												RootPanel.get().add(pv);
+//												vPanel.setVisible(false);
+//												ProductsView pv = new ProductsView();
+//												Window.alert("Bien2");
+//												RootPanel.get().add(pv);
 												
 											}
 										});
@@ -223,7 +249,7 @@ public class Shop implements EntryPoint {
 			//ProductsView pv = new ProductsView();
 			Productvw cv = new Productvw();
 			vPanel.setVisible(false);
-			Window.alert("Bien2");
+			//Window.alert("Bien2");
 			RootPanel.get().add(cv);
 			//ClientServiceImpl clientimpl = new ClientServiceImpl(GWT.getModuleBaseURL()+"clientService");
 			//RegisterView register = new RegisterView(null);

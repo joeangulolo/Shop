@@ -12,6 +12,7 @@ public interface ClientServiceAsync {
 	//void getProduct(String id, AsyncCallback<Product> callback);
 	void addUser(User user, AsyncCallback<User> callback);
 	void getUser(User user, AsyncCallback<User> callback);
+	void userData(User user, AsyncCallback<User> callback);
 
 	void login(String requestUri, AsyncCallback<LoginInfo> asyncCallback);
 
